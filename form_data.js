@@ -68,6 +68,10 @@ window.FormDataCompatibility = (function() {
         part += "Content-Type: text/plain; charset=utf-8" + this.CRLF + this.CRLF;
         part += unescape(encodeURIComponent(value.value)) + this.CRLF;	// UTF-8 encoded like in real FormData
       }
+    } else if (typeof value === 'object' && typeof value.value === 'string') {	// IE7 path
+        part = "Content-Disposition: form-data; name=\"" + key + "\"" + this.CRLF;
+        part += "Content-Type: text/plain; charset=utf-8" + this.CRLF + this.CRLF;
+        part += unescape(encodeURIComponent(value.value)) + this.CRLF;	// UTF-8 encoded like in real FormData
     }
     return part;
   };

@@ -55,5 +55,9 @@ class window.FormDataCompatibility
         part = "Content-Disposition: form-data; name=\"" + key + "\"" + @CRLF
         part += "Content-Type: text/plain; charset=utf-8" + @CRLF + @CRLF
         part += unescape(encodeURIComponent(value.value)) + @CRLF # UTF-8 encoded like in real FormData
+    else if typeof value is "object" and typeof value.value is "string" # IE7 path
+      part = "Content-Disposition: form-data; name=\"" + key + "\"" + @CRLF
+      part += "Content-Type: text/plain; charset=utf-8" + @CRLF + @CRLF
+      part += unescape(encodeURIComponent(value.value)) + @CRLF # UTF-8 encoded like in real FormData
 
     return part
